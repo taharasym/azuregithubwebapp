@@ -1,0 +1,20 @@
+on: workflow_dispatch
+
+name: AzureStorageAccountv1
+
+jobs:
+  azure-github:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Log in with Azure with RG SP with contri access
+      uses: azure/login@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        
+    - name: Running a simple AZ CLI command to create a Storage Account
+      uses: azure/CLI@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+          echo "Create a storage account"
+          az storage account create -n "sa"${{github.run_id}} -g ${{vars.RG_NAME}} -l eastus --sku Standard_LRS --kind StorageV2
