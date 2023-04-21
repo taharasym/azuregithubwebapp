@@ -52,13 +52,13 @@ jobs:
         run: dotnet build -- configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -C Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -C Release -o ${{env.DOTNET_ROOT}}/timapp01
 
       - name: Upload artifact for deployment job
-         uses: actions/upload-artifact@v3
-         with:
+        uses: actions/upload-artifact@v3
+        with:
           name: .net-app
-          path: ${{env.DOTNET._ROOT}}/myapp
+          path: ${{env.DOTNET._ROOT}}/timapp01
 
   deploy:
     permissions:
